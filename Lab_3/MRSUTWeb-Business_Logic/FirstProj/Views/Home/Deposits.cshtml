@@ -1,0 +1,211 @@
+﻿@{
+     ViewBag.Title = "Deposits";
+     Layout = "~/Views/Home/_LayoutPage1.cshtml";
+}
+
+<main id="main">
+
+
+     <!-- ======= Breadcrumbs ======= -->
+     <section id="breadcrumbs" class="breadcrumbs">
+          <div class="container">
+
+               <div class="d-flex justify-content-between align-items-center">
+                    <h2>Depozite BadBank</h2>
+                    <ol>
+                         <li><a href="index.html">Home</a></li>
+                         <li>Depozite</li>
+                    </ol>
+               </div>
+
+          </div>
+     </section><!-- End Breadcrumbs -->
+
+     <section id="pricing" class="pricing">
+          <div class="container">
+
+               <div class="row">
+
+                    <div class="col-lg-3 col-md-6">
+                         <div class="box">
+                              <h3>MoneyPlus</h3>
+                              <h4><sup>%</sup>7.3<span> / year</span></h4>
+                              <ul>
+                                   <li>15 luni</li>
+                                   <li>Flotanta</li>
+                                   <li>MDL</li>
+                                   <li class="na">Capitalizare</li>
+                                   <li class="na">Retragere inainte de termen</li>
+                              </ul>
+                              <div class="btn-wrap">
+                                   <a href="DepositMoneyPlus" class="btn-buy">Citeste mai multe!</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+                         <div class="box">
+                              <h3>MoneyUp</h3>
+                              <h4><sup>%</sup>13<span> / year</span></h4>
+                              <ul>
+                                   <li>25 luni</li>
+                                   <li>Flotanta</li>
+                                   <li>MDL</li>
+                                   <li>Capitalizare</li>
+                                   <li class="na">Retragere inainte de termen</li>
+                              </ul>
+                              <div class="btn-wrap">
+                                   <a href="DepositMoneyUp" class="btn-buy">Citeste mai multe!</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                         <div class="box">
+                              <h3>MoneyMegaGain</h3>
+                              <h4><sup>%</sup>11<span> / year</span></h4>
+                              <ul>
+                                   <li>12 luni</li>
+                                   <li>Fixa</li>
+                                   <li>MDL</li>
+                                   <li>Capitalizare</li>
+                                   <li>Retragere partiala</li>
+                              </ul>
+                              <div class="btn-wrap">
+                                   <a href="DepositMoneyMegaGain" class="btn-buy">Citeste mai multe!</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                         <div class="box">
+                              <span class="advanced">Juridice</span>
+                              <h3>RiseBusiness</h3>
+                              <h4><sup>%</sup>23<span> / year</span></h4>
+                              <ul>
+                                   <li>12 luni</li>
+                                   <li>Fixa</li>
+                                   <li>MDL</li>
+                                   <li>Suma initiala de depunere: 300.000 MDL</li>
+                                   <li>Capitalizare</li>
+                              </ul>
+                              <div class="btn-wrap">
+                                   <a href="DepositRiseBusiness" class="btn-buy">Citeste mai multe!</a>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+
+          </div>
+     </section>
+     <section id="faq" class="faq">
+          <div class="container">
+
+               <div class="section-title">
+                    <h2>Calculator de depozite</h2>
+                    <p>Alege tipul depozitului, introdu suma si primesti suma calculata!</p>
+               </div>
+
+
+               <h2>Alege tipul de depozit:</h2>
+               <select id="tipDepozit" onchange="afiseazaConditii()">
+                    <option>-Alege tipul depozitului-</option>
+                    <option value="0.073" data-moneys="15">MoneyPlus</option>
+                    <option value="0.13" data-moneys="25">MoneyUp</option>
+                    <option value="0.11" data-moneys="12">MoneyMegaGain</option>
+                    <option value="0.23" data-moneys="12">RiseBussines</option>
+               </select>
+
+               <div id="conditii"></div>
+
+               <h2>Introdu suma:</h2>
+               <input type="number" id="suma" placeholder="Introdu suma aici">
+               <div class="btn-wrap">
+                    <button onclick="calculeaza()" class="btn-calculate">Calculează</button>
+               </div>
+
+               <div id="rezultat"></div>
+
+               <script>
+                    function afiseazaConditii() {
+                         var tipDepozit = document.getElementById("tipDepozit");
+                         var index = tipDepozit.selectedIndex;
+                         var moneys = parseInt(tipDepozit.options[index].getAttribute("data-moneys"));
+
+                         var conditiiText = "";
+
+                         switch (index) {
+                              case 1:
+                                   conditiiText = "Perioada: " + moneys + " luni<br>Capitalizare: fără<br>Valută: MDL<br>Persoane: fizice";
+                                   break;
+                              case 2:
+                                   conditiiText = "Perioada: " + moneys + " luni<br>Capitalizare: este<br>Valută: MDL<br>Persoane: fizice";
+                                   break;
+                              case 3:
+                                   conditiiText = "Perioada: " + moneys + " luni<br>Capitalizare: este<br>Valută: MDL<br>Persoane: fizice";
+                                   break;
+                              case 4:
+                                   conditiiText = "Perioada: " + moneys + " luni<br>Capitalizare: este<br>Valută: MDL<br>Persoane: juridice";
+                                   break;
+                              default:
+                                   conditiiText = "";
+                         }
+
+                         document.getElementById("conditii").innerHTML = "<h3>Condițiile depozitului:</h3>" + conditiiText;
+                    }
+
+                    function calculeaza() {
+                         var sumaInitiala = parseFloat(document.getElementById("suma").value);
+                         var tipDepozit = document.getElementById("tipDepozit");
+                         var index = tipDepozit.selectedIndex;
+                         var rataDobanzii = parseFloat(tipDepozit.options[index].value);
+                         var moneys = parseInt(tipDepozit.options[index].getAttribute("data-moneys"));
+                         var numarAni = moneys / 12;
+
+
+                         var dobanda = (sumaInitiala * rataDobanzii * numarAni);
+
+                         var sumaTotala = sumaInitiala + dobanda;
+
+                         document.getElementById("rezultat").innerHTML = "<h2>Rezultatele tale sunt:</h2>" +
+                              "<p>Suma inițială: " + sumaInitiala.toFixed(2) + " MDL</p>" +
+                              "<p>Suma dobânzii: " + dobanda.toFixed(2) + " MDL</p>" +
+                              "<p>Suma totală: " + sumaTotala.toFixed(2) + " MDL</p>" +
+                              "<p>Dobânda se va calcula pentru " + moneys + " luni (" + numarAni.toFixed(2) + " ani).</p>";
+                    }
+               </script>
+
+          </div>
+
+          <style>
+               select, #suma, .btn-calculate {
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 16px;
+               }
+
+               .btn-calculate {
+                    background-color: #c50606;
+                    color: white;
+                    cursor: pointer;
+               }
+
+                    .btn-calculate:hover {
+                         background-color: #022198;
+                    }
+
+               #conditii, #rezultat {
+                    margin-top: 20px;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    background-color: #fff;
+               }
+          </style>
+
+          </div>
+     </section>
+</main>
